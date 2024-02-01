@@ -4,7 +4,7 @@ build:
 
 .PHONY: run
 run:
-	substreams run -e mainnet.eth.streamingfast.io:443 substreams.yaml store_pair_created_events,store_uniswap_price -s 10040530 -t +1000000
+	substreams run -e eth.substreams.pinax.network:443 substreams.yaml map_eth_price -s -10 
 
 .PHONY: pack
 pack:

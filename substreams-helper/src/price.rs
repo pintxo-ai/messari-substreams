@@ -48,10 +48,8 @@ pub fn get_price(
         types::Network::Ethereum => CONFIG.ethereum,
     };
 
-    via_yearn_lens_oracle(&network_config, block_number, token_address.clone())
-        .or_else(|| {
-            via_chainlink_feed_registry(&network_config, block_number, token_address.clone())
-        })
+        via_chainlink_feed_registry(&network_config, block_number, token_address.clone())
+       
         .or_else(|| via_curve_calculations(&network_config, block_number, token_address.clone()))
         .or_else(|| {
             via_sushiswap_calculations(&network_config, block_number, token_address.clone())

@@ -11,7 +11,7 @@ use crate::pb::erc20_price::v1::{Erc20Price, Erc20Prices};
 fn map_eth_price(block: eth::Block) -> Result<Erc20Prices, substreams::errors::Error> {
     map_price_for_tokens(
         block.number,
-        vec![hex!("c02aaa39b223fe8d0a0e5c4f27ead9083c756cc2").to_vec()],
+        vec![hex!("c02aaa39b223fe8d0a0e5c4f27ead9083c756cc2").to_vec(), hex!("da47862a83dac0c112ba89c6abc2159b95afd71c").to_vec(), hex!("5a98fcbea516cf06857215779fd812ca3bef1b32").to_vec()],
     )
 }
 
@@ -24,7 +24,7 @@ fn map_price_for_tokens(
     for erc20_token in erc20_tokens {
         let token_price = price::get_price(Network::Ethereum, block_number, erc20_token.clone())
             .map_err(|e| {
-                substreams::errors::Error::Unexpected(format!("Failed to get price: {}", e))
+                substreams::errors::Error::msg(format!("Failed to get price: {}", e))
             })?;
 
         let token =
